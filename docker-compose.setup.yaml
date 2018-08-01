@@ -1,0 +1,15 @@
+version: '2.1'
+
+services:
+
+  kong-migration:
+      image: kong
+      restart: on-failure
+      depends_on:
+        kong-database:
+          condition: service_healthy
+      environment:
+        - KONG_DATABASE=postgres
+        - KONG_PG_HOST=kong-database
+      command: kong migrations up
+  
