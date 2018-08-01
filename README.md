@@ -47,7 +47,9 @@ docker-compose -f docker-compose.yaml -f docker-compose.set-upstream.yaml up -d
 docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d
 ````
 
-After done setting upstream endpoints and running dashboard, you should be able to get list of upstream endpoints like this:
+After done setting upstream endpoints and running dashboard, you should be able to get list of upstream endpoints via this endpoint:
+
+``` http://localhost:8001/apis ```
 
 <p align="center">
   <a href="./doc/images/available-upstream.png" target="_blank">  
@@ -55,7 +57,9 @@ After done setting upstream endpoints and running dashboard, you should be able 
   </a>
 </p>
 
-And you should be able to call this upstream endpoint via Kong API Gateway like this:
+And you should be able to call the upstream endpoint that sit behind Kong API Gateway with this command:
+
+``` curl -i -X GET --url localhost:8000 --header 'Host: mockbin.com' ```
 
 <p align="center">
   <a href="./doc/images/call-to-upstream-endpoint.png" target="_blank">  
