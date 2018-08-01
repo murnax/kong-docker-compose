@@ -1,0 +1,10 @@
+version: '2.1'
+
+services:
+
+  kong-set-upstream:
+    build: ./set-upstream
+    depends_on:
+      kong:
+        condition: service_healthy
+    command: sh ./entrypoint.sh

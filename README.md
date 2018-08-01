@@ -22,9 +22,10 @@ And here is a dependency direction between each of these services:
 We set restarting policy on "kong" service to "always" because this service depends on migration status on "kong-database" that is handled by "kong-migration" that is a self-terminated service that will be removed after finish execution, so "kong" can not depend on "kong-migration".
 
 
-I also seperate these 4 services into 3 docker-compose files like this:
+I also seperate these 4 services into 4 docker-compose files like this:
 - docker-compose.yaml: base file that run "kong-database" service
 - docker-compose.setup.yaml: contains "kong-migration" service for migrating "kong-database" service
+- docker-compose.set-upstream.yaml: is used to add upstream endpoints to "kong" service
 - docker-compose.dev.yaml: contains "kong" and "dashboard" services
 
 ### To run these compose files:
@@ -32,6 +33,11 @@ I also seperate these 4 services into 3 docker-compose files like this:
 - For migration step
 ````
 docker-compose -f docker-compose.yaml -f docker-compose.setup.yaml up -d
+````
+
+- For setting up upstream endpoints
+````
+docker-compose -f docker-compose.yaml -f docker-compose.set-upstream.yaml up -d
 ````
 
 - For running Kong API gateway
