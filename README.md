@@ -1,8 +1,8 @@
 # Kong with Docker-Compose
 
-An example how to start using Kong in Docker compose.
+An example how to use Kong with Docker compose.
 
-In this compose file, there are 4 services:
+There are 4 services in this example:
 - kong: API Gateway
 - kong-migration: self-terminated container, is used to only migrate database for Kong.
 - kong-database: Postgres database *(Kong supports Postgres and Cassandra)*
