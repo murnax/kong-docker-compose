@@ -14,8 +14,6 @@ services:
       - "8001:8001"
       - "8443:8443"
       - "8444:8444"
-      - "7946:7946"
-      - "7946:7946/udp"
     environment:
       - KONG_DATABASE=postgres
       - KONG_PG_HOST=kong-database
@@ -41,5 +39,5 @@ services:
     depends_on:
       kong:
         condition: service_healthy
-    # command: sh ./entrypoint.sh
+    command: sh ./entrypoint.sh
     
