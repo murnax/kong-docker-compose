@@ -10,9 +10,11 @@ There are 4 services in this example:
 
 And here is a dependency direction between each of these services:
 
-<a href="./dependency-direction.png" target="_blank">  
-  <img src="./dependency-direction.png" width="550">
-</a>
+<p align="center">
+  <a href="./doc/images/dependency-direction.png" target="_blank">  
+    <img src="./doc/images/dependency-direction.png" width="550">
+  </a>
+</p>
 
 
 - **"kong-database"** is the only service that has on dependencies on other services
@@ -25,7 +27,7 @@ We set restarting policy on "kong" service to "always" because this service depe
 I also seperate these 4 services into 4 docker-compose files like this:
 - docker-compose.yaml: base file that run "kong-database" service
 - docker-compose.setup.yaml: contains "kong-migration" service for migrating "kong-database" service
-- docker-compose.set-upstream.yaml: is used to add upstream endpoints to "kong" service
+- docker-compose.set-upstream.yaml: is used to add upstream endpoints to "kong" service by using [Kongfig](https://github.com/mybuilder/kongfig) module
 - docker-compose.dev.yaml: contains "kong" and "dashboard" services
 
 ### To run these compose files:
@@ -35,7 +37,7 @@ I also seperate these 4 services into 4 docker-compose files like this:
 docker-compose -f docker-compose.yaml -f docker-compose.setup.yaml up -d
 ````
 
-- For setting up upstream endpoints
+- For setting upstream endpoints
 ````
 docker-compose -f docker-compose.yaml -f docker-compose.set-upstream.yaml up -d
 ````
@@ -45,6 +47,21 @@ docker-compose -f docker-compose.yaml -f docker-compose.set-upstream.yaml up -d
 docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d
 ````
 
+After done setting upstream endpoints and running dashboard, you should be able to get list of upstream endpoints like this:
+
+<p align="center">
+  <a href="./doc/images/available-upstream.png" target="_blank">  
+    <img src="./doc/images/available-upstream.png" width="550">
+  </a>
+</p>
+
+And you should be able to call this upstream endpoint via Kong API Gateway like this:
+
+<p align="center">
+  <a href="./doc/images/call-to-upstream-endpoint.png" target="_blank">  
+    <img src="./doc/images/call-to-upstream-endpoint.png" width="550">
+  </a>
+</p>
+
 ### Todo:
-- Integrate [Kongfig](https://github.com/mybuilder/kongfig) to setup upstream services.
 - Create Makefile to run docker-compose
